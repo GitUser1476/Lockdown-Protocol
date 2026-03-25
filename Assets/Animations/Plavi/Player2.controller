@@ -28,32 +28,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-7652997525353670185
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: WalkUpBlue
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 61ee05394dfb7f74d8b26b1a2cb26cfc, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!206 &-7451105227695398328
 BlendTree:
   m_ObjectHideFlags: 1
@@ -122,7 +96,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: b49d0b1dea4d9df488edb94a3d91dbf8, type: 2}
+  m_Motion: {fileID: 7400000, guid: 651bef94810c89e4bb670c67cc04b5ed, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -226,9 +200,6 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -5681111025618890809}
     m_Position: {x: 80, y: 70, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -7652997525353670185}
-    m_Position: {x: 115, y: 135, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
