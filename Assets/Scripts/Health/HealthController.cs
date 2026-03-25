@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HealthController : MonoBehaviour
 {
@@ -28,6 +29,11 @@ public class HealthController : MonoBehaviour
         if (_currentHealt < 0)
         {
             _currentHealt = 0;
+        }
+
+        if(_currentHealt == 0)
+        {
+            SceneManager.LoadScene("Defeat");
         }
     }
 
