@@ -2,36 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class HealthController : MonoBehaviour
 {
-    [SerializeField] private float _currentHealt;
+    [SerializeField] private float _currentHealth;
+    [SerializeField] private float _maximumHealth = 100f;
 
-    [SerializeField] private float _maximumHealt;
-
-    public float remainingHealthPercentage
+    public float RemainingHealthPercentage
     {
         get
         {
-            return _currentHealt / _maximumHealt;
+            if (_maximumHealth <= 0)
+            {
+                return 0f;
+            }
+
+            return _currentHealth / _maximumHealth;
         }
+    }
+
+    public UnityEvent OnHealthChanged;
+
+    private void Start()
+    {
+        if (_currentHealth < 0)
+        {
+            _currentHealth = 0;
+        }
+
+        if (_currentHealth > _maximumHealth)
+        {
+            _currentHealth = _maximumHealth;
+        }
+
+        OnHealthChanged.Invoke();
     }
 
     public void TakeDamage(float damageAmount)
     {
-        if(_currentHealt == 0)
+        if (_currentHealth <= 0)
         {
             return;
         }
 
-        _currentHealt -= damageAmount;
+        _currentHealth -= damageAmount;
 
-        if (_currentHealt < 0)
+        if (_currentHealth < 0)
         {
-            _currentHealt = 0;
+            _currentHealth = 0;
         }
 
-        if(_currentHealt == 0)
+        OnHealthChanged.Invoke();
+
+        if (_currentHealth == 0)
         {
             SceneManager.LoadScene("Defeat");
         }
@@ -39,16 +63,18 @@ public class HealthController : MonoBehaviour
 
     public void AddHealth(float amountToAdd)
     {
-        if(_currentHealt == _maximumHealt)
+        if (_currentHealth >= _maximumHealth)
         {
             return;
         }
 
-        _currentHealt += amountToAdd;
+        _currentHealth += amountToAdd;
 
-        if (_currentHealt > _maximumHealt)
+        if (_currentHealth > _maximumHealth)
         {
-            _currentHealt = _maximumHealt;
+            _currentHealth = _maximumHealth;
         }
+
+        OnHealthChanged.Invoke();
     }
 }
