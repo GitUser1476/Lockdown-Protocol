@@ -81,6 +81,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: a7b49f45798cca349a94e622cf09e75e, type: 3}
     - target: {fileID: 7247219724468675618, guid: f713667d0296cc84cb53e8ada4cf1caf, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247219724468675618, guid: f713667d0296cc84cb53e8ada4cf1caf, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
@@ -109,3 +113,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dde252e6fbb06847a895cb2d474f736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healthAmount: 0
