@@ -25,5 +25,4 @@ public class Movement2 : MonoBehaviour
 
         input.Normalize();
     }
-
 }
