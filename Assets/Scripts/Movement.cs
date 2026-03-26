@@ -34,5 +34,4 @@ public class Movement : MonoBehaviour
         input1.Normalize();
         input2.Normalize();
     }
-
 }
