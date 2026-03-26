@@ -9,6 +9,10 @@ public class Movement2 : MonoBehaviour
     private Vector2 input;
     public float speed = 4f;
 
+    public bool moving2;
+
+    public Animator animator;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -20,10 +24,31 @@ public class Movement2 : MonoBehaviour
     }
     private void Update()
     {
-        input.x = Input.GetAxisRaw("Horizontal2");
-        input.y = Input.GetAxisRaw("Vertical2");
+        input.x = UnityEngine.Input.GetAxisRaw("Horizontal2");
+        input.y = UnityEngine.Input.GetAxisRaw("Vertical2");
 
         input.Normalize();
+        Animate();
     }
+    public void Animate()
+    {
+        //Player1
+        if (input.magnitude > 0.1f || input.magnitude < -0.1f)
+        {
+            animator.SetBool("Moving", true);
+            moving2 = true;
+        }
+        else
+        {
+            animator.SetBool("Moving", false);
+            moving2 = false;
+        }
+        if (moving2)
+        {
+            animator.SetFloat("x", input.x);
+            animator.SetFloat("y", input.y);
+        }
+        //Player2
 
+    }
 }

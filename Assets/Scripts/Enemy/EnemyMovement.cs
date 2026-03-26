@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] private float _speed;
-    [SerializeField] private float _rotationSpeed;
+    [SerializeField] private float _speed = 4f;
 
     private Rigidbody2D _rigidbody;
     private PlayerAwarenessController _playerAwarenessController;
     private Vector2 _targetDirection;
+
+    public bool moving;
+    public Animator animator;
 
     private void Awake()
     {
@@ -17,18 +19,22 @@ public class EnemyMovement : MonoBehaviour
         _playerAwarenessController = GetComponent<PlayerAwarenessController>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         UpdateTargetDirection();
-        RotateTowardsTarget();
+        Animate();
+    }
+
+    private void FixedUpdate()
+    {
         SetVelocity();
     }
 
     private void UpdateTargetDirection()
     {
-        if(_playerAwarenessController.AwareOfPlayer)
+        if (_playerAwarenessController != null && _playerAwarenessController.AwareOfPlayer)
         {
-            _targetDirection = _playerAwarenessController.DirectionToPlayer; 
+            _targetDirection = _playerAwarenessController.DirectionToPlayer.normalized;
         }
         else
         {
@@ -36,28 +42,27 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    private void RotateTowardsTarget()
-    {
-        if(_targetDirection == Vector2.zero)
-        {
-            return;
-        }
-
-        Quaternion targetRotation = Quaternion.LookRotation(transform.forward, _targetDirection);
-        Quaternion rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
-
-        _rigidbody.SetRotation(rotation);
-    }
-
     private void SetVelocity()
     {
-        if(_targetDirection == Vector2.zero)
+        _rigidbody.velocity = _targetDirection * _speed;
+    }
+
+    private void Animate()
+    {
+        Vector2 currentVelocity = _rigidbody.velocity;
+
+        if (currentVelocity.magnitude > 0.1f)
         {
-            _rigidbody.velocity =  Vector2.zero;
+            animator.SetBool("Moving", true);
+            moving = true;
+
+            animator.SetFloat("x", currentVelocity.x);
+            animator.SetFloat("y", currentVelocity.y);
         }
         else
         {
-            _rigidbody.velocity = transform.up * _speed;
+            animator.SetBool("Moving", false);
+            moving = false;
         }
     }
 }
